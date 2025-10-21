@@ -17,10 +17,8 @@ import java.util.*;
 public class DogApiBreedFetcher implements BreedFetcher {
     private final OkHttpClient client = new OkHttpClient();
 
-
-
     @Override
-    public List<String> getSubBreeds(String breed) {
+    public List<String> getSubBreeds(String breed) throws BreedNotFoundException {
         // TODO Task 1: Complete this method based on its provided documentation
         //      and the documentation for the dog.ceo API. You may find it helpful
         //      to refer to the examples of using OkHttpClient from the last lab,
@@ -48,11 +46,11 @@ public class DogApiBreedFetcher implements BreedFetcher {
             }
 
             else {
-                throw new BreedNotFoundException("Couldn't find breed: " + breed);
+                throw new BreedNotFoundException("Breed not found: " + breed);
             }
         }
         catch (IOException | RuntimeException event) {
-            throw new BreedNotFoundException("Couldn't fetch sub-breeds for breed: " + breed + ", " + event);
+            throw new BreedNotFoundException("Couldn't get sub-breeds for breed: " + breed + ", " + event);
         }
     }
 }
